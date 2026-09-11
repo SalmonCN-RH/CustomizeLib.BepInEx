@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/解决方案项/">
+    <File Path="Directory.Build.props" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Lib/CustomizeLib.BepInEx.csproj" />
+  <Project Path="Patcher/BepInPriority.BepInEx/BepInPriority.BepInEx.csproj" />
+</Solution>
