@@ -32,9 +32,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx.csproj",
-      "projectName": "CustomizeLib.BepInEx",
-      "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx.csproj",
+      "projectUniqueName": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj",
+      "projectName": "CustomizeLib.BepInEx_Re",
+      "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\obj\\",
       "projectStyle": "PackageReference",

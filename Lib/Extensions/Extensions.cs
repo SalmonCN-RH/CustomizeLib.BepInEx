@@ -1,5 +1,6 @@
-﻿using CustomizeLib.BepInEx.Internal.Events;
+﻿using BepInEx.Unity.IL2CPP.Hook;
 using CustomizeLib.BepInEx.Internal.Extensions;
+using CustomizeLib.BepInEx.Internal.Extensions.EventExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,24 @@ namespace CustomizeLib.BepInEx.Extensions
 
         /// <inheritdoc cref="BindingFlagExtensions.AddDeclaredOnly(BindingFlags)"/>
         internal static BindingFlags AddDeclaredOnly(this BindingFlags flags) => BindingFlagExtensions.AddDeclaredOnly(flags);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemoveFlags(BindingFlags, BindingFlags)"/>
+        public static BindingFlags RemoveFlags(this BindingFlags flags, BindingFlags Remove) => BindingFlagExtensions.RemoveFlags(flags, Remove);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemovePublic(BindingFlags)"/>
+        public static BindingFlags RemovePublic(this BindingFlags flags) => BindingFlagExtensions.RemovePublic(flags);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemoveNonPublic(BindingFlags)"/>
+        internal static BindingFlags RemoveNonPublic(this BindingFlags flags) => BindingFlagExtensions.RemoveNonPublic(flags);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemoveStatic(BindingFlags)"/>
+        internal static BindingFlags RemoveStatic(this BindingFlags flags) => BindingFlagExtensions.RemoveStatic(flags);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemoveInstance(BindingFlags)"/>
+        internal static BindingFlags RemoveInstance(this BindingFlags flags) => BindingFlagExtensions.RemoveInstance(flags);
+
+        /// <inheritdoc cref="BindingFlagExtensions.RemoveDeclaredOnly(BindingFlags)"/>
+        internal static BindingFlags RemoveDeclaredOnly(this BindingFlags flags) => BindingFlagExtensions.RemoveDeclaredOnly(flags);
         #endregion
 
         #region AssetBundleExtensions
@@ -70,6 +89,14 @@ namespace CustomizeLib.BepInEx.Extensions
         /// <inheritdoc cref="ObjectExtensions.To{T}(object)"/>
         internal static T To<T>(this object obj) =>
             ObjectExtensions.To<T>(obj);
+
+        /// <inheritdoc cref="ObjectExtensions.IsSubTypeOf(object, Type, bool)"/>
+        internal static bool IsSubTypeOf(this object obj, Type type, bool containBase = true) =>
+            ObjectExtensions.IsSubTypeOf(obj, type, containBase);
+
+        /// <inheritdoc cref="ObjectExtensions.IsSubTypeOf{TBase}(object, bool)"/>
+        internal static bool IsSubTypeOf<TBase>(this object obj, bool containBase = true) =>
+            ObjectExtensions.IsSubTypeOf<TBase>(obj, containBase);
         #endregion
 
         #region IPlantEventExtensions
@@ -86,6 +113,32 @@ namespace CustomizeLib.BepInEx.Extensions
         /// <inheritdoc cref="IPlantEventExtensions.Bind(object)"/>
         internal static void Bind(this IPlantEvent plantEvent, object obj) =>
             IPlantEventExtensions.Bind(plantEvent, obj);
+        #endregion
+
+        #region TypeExtensions
+        /// <inheritdoc cref="Internal.Extensions.TypeExtensions.Il2CppName(Type, bool)"/>
+        public static string Il2CppName(this Type type, bool addr = false) =>
+            Internal.Extensions.TypeExtensions.Il2CppName(type, addr);
+
+        /// <inheritdoc cref="Internal.Extensions.TypeExtensions.Il2CppType(Type)"/>
+        internal static Il2CppSystem.Type Il2CppType(this Type type) =>
+            Internal.Extensions.TypeExtensions.Il2CppType(type);
+        #endregion
+
+        #region IApplyDetourExtensions
+        /// <inheritdoc cref="IApplyDetourExtensions.GetOriginals{TDelegate}(IDetourHook{TDelegate})"/>
+        public static TDelegate[] GetOriginals<TDelegate>(this IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
+            IApplyDetourExtensions.GetOriginals(detour);
+
+        /// <inheritdoc cref="IApplyDetourExtensions.GetDetours{TDelegate}(IDetourHook{TDelegate})"/>
+        public static INativeDetour[] GetDetours<TDelegate>(IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
+            IApplyDetourExtensions.GetDetours(detour);
+        #endregion
+
+        #region IEnumerableExtensions
+        /// <inheritdoc cref="IEnumerableExtensions.DoAll{T}(IEnumerable{T}, Action{T})"/>
+        public static IEnumerable<T> DoAll<T>(this IEnumerable<T> enumerable, Action<T> action) =>
+            IEnumerableExtensions.DoAll(enumerable, action);
         #endregion
     }
 }

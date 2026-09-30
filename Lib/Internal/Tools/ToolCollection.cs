@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BepInEx.Unity.IL2CPP.Hook;
+using CustomizeLib.BepInEx.Internal.Extensions;
+using Il2CppInterop.Runtime.Runtime.VersionSpecific.MethodInfo;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.LowLevel;
 
 namespace CustomizeLib.BepInEx.Internal.Tools
@@ -128,6 +126,42 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         internal static MethodInfo[] TypeTools_GetAllMethods(Type[] types, Func<Type, (MethodInfo? info, bool filter)> filter) =>
             TypeTools.GetAllMethods(types, filter);
 
+        /// <inheritdoc cref="TypeTools.GetMethods(Type, string?, int?, Type?[]?, BindingFlags)"/>
+        internal static MethodBase[] TypeTools_GetMethods(
+            Type type,
+            string? name = null,
+            int? genericArgCount = null,
+            Type?[]? paramTypes = null,
+            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static) =>
+            TypeTools.GetMethods(type, name, genericArgCount, paramTypes, flags);
+
+        #region 特性相关
+
+            /// <inheritdoc cref="TypeTools.GetAttrWith{TMember}(IEnumerable{Type}, Type, Func{Type, IEnumerable{TMember}}, bool)"/>
+        internal static IEnumerable<TMember> TypeTools_GetAttrWith<TMember>(IEnumerable<Type> types, Type attribute, Func<Type, IEnumerable<TMember>> get, bool inherit = false)
+            where TMember : MemberInfo =>
+            TypeTools.GetAttrWith(types, attribute, get, inherit);
+
+        /// <inheritdoc cref="TypeTools.GetAttrWith{TMember}(IEnumerable{Type}, Type, Func{Type, IEnumerable{TMember}}, bool)"/>
+        /// <param name="type">类型</param>
+        internal static IEnumerable<TMember> TypeTools_GetAttrWith<TMember>(Type type, Type attribute, Func<Type, IEnumerable<TMember>> get, bool inherit = false)
+            where TMember : MemberInfo =>
+            TypeTools.GetAttrWith(type.ToIEnumerable(), attribute, get, inherit);
+
+        /// <inheritdoc cref="TypeTools.GetAttrWith{TMember}(IEnumerable{Type}, Type, Func{Type, IEnumerable{TMember}}, bool)"/>
+        /// <typeparam name="TAttribute">特性类</typeparam>
+        internal static IEnumerable<TMember> TypeTools_GetAttrWith<TMember, TAttribute>(IEnumerable<Type> types, Func<Type, IEnumerable<TMember>> get, bool inherit = false)
+            where TMember : MemberInfo where TAttribute : Attribute =>
+            TypeTools.GetAttrWith(types, typeof(TAttribute), get, inherit);
+
+        /// <inheritdoc cref="TypeTools.GetAttrWith{TMember}(IEnumerable{Type}, Type, Func{Type, IEnumerable{TMember}}, bool)"/>
+        /// <typeparam name="TAttribute">特性类</typeparam>
+        /// <param name="type">类型</param>
+        internal static IEnumerable<TMember> TypeTools_GetAttrWith<TMember, TAttribute>(Type type, Func<Type, IEnumerable<TMember>> get, bool inherit = false)
+            where TMember : MemberInfo where TAttribute : Attribute =>
+            TypeTools.GetAttrWith(type.ToIEnumerable(), typeof(TAttribute), get, inherit);
+        #endregion
+
         /// <summary>
         /// 获取方法
         /// </summary>
@@ -189,6 +223,41 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         /// <inheritdoc cref="ConsoleTools.SetOutputEncoding()"/>
         internal static void ConsoleTools_SetOutputEncoding() =>
             ConsoleTools.SetOutputEncoding();
+        #endregion
+
+        #region DetourTools
+        /// <inheritdoc cref="DetourTools.Constructor"/>
+        internal const string DetourTools_Constructor = DetourTools.Constructor;
+        /// <inheritdoc cref="DetourTools.StaticConstructor"/>
+        internal const string DetourTools_StaticConstructor = DetourTools.StaticConstructor;
+
+        /// <inheritdoc cref="DetourTools.CreateAndApply{T}(nint, T, out T)"/>
+        internal static INativeDetour DetourTools_CreateAndApply<T>(nint from, T to, out T original) where T : Delegate =>
+            DetourTools.CreateAndApply(from, to, out original);
+
+        /// <inheritdoc cref="DetourTools.CreateAndApply{T}(INativeMethodInfoStruct, T, out T)"/>
+        internal static INativeDetour DetourTools_CreateAndApply<T>(INativeMethodInfoStruct from, T to, out T original) where T : Delegate =>
+            DetourTools.CreateAndApply(from, to, out original);
+
+        /// <inheritdoc cref="DetourTools.GetMethod(string, string, string, bool, string, string, string[])"/>
+        internal static INativeMethodInfoStruct DetourTools_GetMethod(string assemblyName, string namespaze, string className, bool isGeneric, string methodName, string returnTypeName, params string[] argTypes) =>
+            DetourTools.GetMethod(assemblyName, namespaze, className, isGeneric, methodName, returnTypeName, argTypes);
+
+        /// <inheritdoc cref="DetourTools.GetMethod(Type, MethodBase)"/>
+        internal static INativeMethodInfoStruct DetourTools_GetMethod(Type type, MethodBase method) =>
+            DetourTools.GetMethod(type, method);
+
+        /// <inheritdoc cref="DetourTools.GetMethod(Type, string)"/>
+        internal static INativeMethodInfoStruct DetourTools_GetMethod(Type type, string methodName) =>
+            DetourTools.GetMethod(type, methodName);
+
+        /// <inheritdoc cref="DetourTools.GetConstructor(Type, Type[])"/>
+        internal static INativeMethodInfoStruct DetourTools_GetConstructor(Type type, params Type[] argTypes) =>
+            DetourTools.GetConstructor(type, argTypes);
+
+        /// <inheritdoc cref="DetourTools.GetStaticConstructor(Type)"/>
+        internal static INativeMethodInfoStruct DetourTools_GetStaticConstructor(Type type) =>
+            DetourTools.GetStaticConstructor(type);
         #endregion
     }
 }

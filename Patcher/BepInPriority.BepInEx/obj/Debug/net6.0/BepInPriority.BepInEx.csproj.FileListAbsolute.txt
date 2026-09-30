@@ -11,3 +11,17 @@ F:\vsrepos\Customizelib\BepInEx\CustomizeLib.BepInEx-re\Patcher\BepInPriority.Be
 F:\vsrepos\Customizelib\BepInEx\CustomizeLib.BepInEx-re\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\refint\BepInPriority.BepInEx.dll
 F:\vsrepos\Customizelib\BepInEx\CustomizeLib.BepInEx-re\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.pdb
 F:\vsrepos\Customizelib\BepInEx\CustomizeLib.BepInEx-re\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\ref\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\bin\Debug\net6.0\BepInPriority.BepInEx.deps.json
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\bin\Debug\net6.0\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\bin\Debug\net6.0\BepInPriority.BepInEx.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.csproj.AssemblyReference.cache
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.GeneratedMSBuildEditorConfig.editorconfig
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.AssemblyInfoInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.AssemblyInfo.cs
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.csproj.CoreCompileInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.sourcelink.json
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\refint\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPriority.BepInEx.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\ref\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Patcher\BepInPriority.BepInEx\obj\Debug\net6.0\BepInPri.4BAFD3D4.Up2Date

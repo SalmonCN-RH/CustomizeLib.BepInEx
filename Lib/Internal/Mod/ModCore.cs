@@ -1,18 +1,11 @@
 ﻿using BepInEx;
-using BepInEx.Bootstrap;
 using BepInEx.Unity.IL2CPP;
-using BepInEx.Unity.IL2CPP.Hook;
 using CustomizeLib.BepInEx.Internal.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomizeLib.BepInEx.Internal.Mod
 {
-    [BepInPlugin("salmon.inf75.pvzcustomization.remake", "PVZCustomization-Remake", "3.9")]
+    [BepInPlugin(ModInfo.Core_GUID, ModInfo.Core_NAME, ModInfo.Core_VER)]
     [BepInPriority(BepInPriority.High + 1)]
     internal class ModCore : BasePlugin
     {
@@ -22,8 +15,11 @@ namespace CustomizeLib.BepInEx.Internal.Mod
         {
             Instance = this;
 
+            var dlls = InternalTools.TypeTools_GetAllAssemblies();
+
             var methods = InternalTools.TypeTools_GetAllMethods(
-                types: InternalTools.TypeTools_GetAllDerivedTypes<IModTask>(InternalTools.TypeTools_GetAllAssemblies()),
+                types: [.. InternalTools.TypeTools_GetAllDerivedTypes<IModTask>(InternalTools.TypeTools_GetAllAssemblies()).
+                                Where(t => t != typeof(IInitTask) && !t.IsGenericType)],
                 filter: (t) => InternalTools.TypeTools_TryGetMethodWithFlag(t, "RunAll", InternalTools.TypeTools_DefaultDeclaredOnly));
             foreach (var method in methods)
             {
@@ -34,9 +30,11 @@ namespace CustomizeLib.BepInEx.Internal.Mod
                 catch (Exception ex)
                 {
                     Logger.LogError(
-                        $"Error in execute IModTask: " +
-                        $"Message: {ex.Message}" +
-                        $"{ex.StackTrace}");
+                        $"Error in execute IModTask: \n" +
+                        $"Message: {ex.Message}\n" +
+                        $"{ex.StackTrace}\n" +
+                        $"ToString: \n" +
+                        $"{ex}");
                 }
             }
         }

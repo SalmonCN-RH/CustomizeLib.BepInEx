@@ -64,6 +64,7 @@ namespace CustomizeLib.BepInEx
             RemoveTag(zombieType, tag.ToString());
         #endregion
 
+        #region 工具方法
         /// <inheritdoc cref="ModImpl.GetAssetBundle(Assembly, string)"/>
         public static AssetBundle GetAssetBundle(Assembly assembly, string name) => ModImpl.GetAssetBundle(assembly, name);
 
@@ -75,6 +76,10 @@ namespace CustomizeLib.BepInEx
         /// <exception cref="ArgumentException"></exception>
         public static AssetBundle GetAssetBundle(string name) => ModImpl.GetAssetBundle(Assembly.GetCallingAssembly(), name);
 
+        /// <inheritdoc cref="ModImpl.PlaySound(AudioClip, float)"/>
+        public static void PlaySound(AudioClip audio, float volume = 1.0f) => ModImpl.PlaySound(audio, volume);
+        #endregion
+
         /// <inheritdoc cref="RegData.RegisterCustomPlant{TBase, TBehaviour}(CustomPlant)"/>
         public static void RegisterCustomPlant<TBase, TBehaviour>(CustomPlant customPlant) where TBase : Plant where TBehaviour : MonoBehaviour =>
             RegData.Instance.RegisterCustomPlant<TBase, TBehaviour>(customPlant);
@@ -82,5 +87,25 @@ namespace CustomizeLib.BepInEx
         /// <inheritdoc cref="RegData.RegisterCustomPlant{TBase}(CustomPlant)"/>
         public static void RegisterCustomPlant<TBase>(CustomPlant customPlant) where TBase : Plant =>
             RegData.Instance.RegisterCustomPlant<TBase>(customPlant);
+
+        /// <inheritdoc cref="RegData.RegisterCustomBullet{TBase, TBehaviour}(CustomBullet)"/>
+        public static void RegisterCustomBullet<TBase, TBehaviour>(CustomBullet customBullet) where TBase : Bullet where TBehaviour : MonoBehaviour =>
+            RegData.Instance.RegisterCustomBullet<TBase, TBehaviour>(customBullet);
+
+        /// <inheritdoc cref="RegData.RegisterCustomBullet{TBase}(CustomBullet)"/>
+        public static void RegisterCustomBullet<TBase>(CustomBullet customBullet) where TBase : Bullet =>
+            RegData.Instance.RegisterCustomBullet<TBase>(customBullet);
+
+        /// <inheritdoc cref="RegData.RegisterCustomSound(CustomSound)"/>
+        public static void RegisterCustomSound(CustomSound customSound) =>
+            RegData.Instance.RegisterCustomSound(customSound);
+
+        /// <inheritdoc cref="RegData.RegisterCustomMusic(CustomMusic)"/>
+        public static void RegisterCustomSound(CustomMusic customMusic) =>
+            RegData.Instance.RegisterCustomMusic(customMusic);
+
+        /// <inheritdoc cref="RegData.RegisterCustomParticle(CustomParticle)"/>
+        public static void RegisterCustomParticle(CustomParticle customParticle) =>
+            RegData.Instance.RegisterCustomParticle(customParticle);
     }
 }

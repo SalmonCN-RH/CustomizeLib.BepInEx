@@ -10,7 +10,7 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks
     {
         readonly IGameAppEvent.GameAppEvent IGameAppEvent.Filter => IGameAppEvent.GameAppEvent.PostStart;
 
-        readonly void IModTask.Do()
+        readonly void IGameAppEvent.OnEvent()
         {
             foreach (var callback in CorePlugin.OnLoadCallbacks) callback.Invoke();
         }

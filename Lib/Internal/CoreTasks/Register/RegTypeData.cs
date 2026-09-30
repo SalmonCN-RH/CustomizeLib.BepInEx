@@ -10,7 +10,7 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
 {
     internal struct RegTypeData : ILoadTask
     {
-        readonly void IModTask.Do()
+        readonly void ILoadTask.OnLoad()
         {
             foreach (var (pt, tags) in RegData.Instance.TypeExtraMgr.CustomPlantTypeDatas)
                 foreach (var tag in tags)

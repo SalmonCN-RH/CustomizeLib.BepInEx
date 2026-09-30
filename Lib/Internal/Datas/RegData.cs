@@ -29,6 +29,23 @@ namespace CustomizeLib.BepInEx.Internal.Datas
             TypeExtraMgr = new();
         }
 
+        #region TypeMgrExtra
+        /// <inheritdoc cref="TypeExtra.AddTag(PlantType, string)"/>
+        internal readonly void AddTag(PlantType plantType, string tag) =>
+            TypeExtraMgr.AddTag(plantType, tag);
+
+        /// <inheritdoc cref="TypeExtra.RemoveTag(PlantType, string)"/>
+        internal readonly void RemoveTag(PlantType plantType, string tag) =>
+            TypeExtraMgr.RemoveTag(plantType, tag);
+
+        /// <inheritdoc cref="TypeExtra.AddTag(ZombieType, string)"/>
+        internal readonly void AddTag(ZombieType zombieType, string tag) =>
+            TypeExtraMgr.AddTag(zombieType, tag);
+        /// <inheritdoc cref="TypeExtra.RemoveTag(ZombieType, string)"/>
+        internal readonly void RemoveTag(ZombieType zombieType, string tag) =>
+            TypeExtraMgr.RemoveTag(zombieType, tag);
+        #endregion
+
         /// <summary>
         /// 注册二创植物
         /// </summary>
@@ -69,20 +86,59 @@ namespace CustomizeLib.BepInEx.Internal.Datas
         /// <param name="res">融合结果</param>
         readonly internal void AddFusion(ID a, ID b, ID res) => CustomFusions.Add((a, b, res));
 
-        /// <inheritdoc cref="TypeExtra.AddTag(PlantType, string)"/>
-        internal readonly void AddTag(PlantType plantType, string tag) =>
-            TypeExtraMgr.AddTag(plantType, tag);
+        /// <summary>
+        /// 注册二创子弹
+        /// </summary>
+        /// <typeparam name="TBase">子弹基类</typeparam>
+        /// <typeparam name="TBehaviour">自定义子弹类</typeparam>
+        /// <param name="customBullet">子弹数据</param>
+        readonly internal void RegisterCustomBullet<TBase, TBehaviour>(CustomBullet customBullet) where TBase : Bullet where TBehaviour : MonoBehaviour
+        {
+            customBullet.Prefab.AddComponent<TBase>().theBulletType = customBullet.Id;
+            customBullet.Prefab.AddComponent<TBehaviour>();
 
-        /// <inheritdoc cref="TypeExtra.RemoveTag(PlantType, string)"/>
-        internal readonly void RemoveTag(PlantType plantType, string tag) =>
-            TypeExtraMgr.RemoveTag(plantType, tag);
+            CustomBullets.AddAndLogIfDup(customBullet.Id, customBullet, $"Duplicate bullet id {(int)customBullet.Id}");
+        }
 
-        /// <inheritdoc cref="TypeExtra.AddTag(ZombieType, string)"/>
-        internal readonly void AddTag(ZombieType zombieType, string tag) =>
-            TypeExtraMgr.AddTag(zombieType, tag);
-        /// <inheritdoc cref="TypeExtra.RemoveTag(ZombieType, string)"/>
-        internal readonly void RemoveTag(ZombieType zombieType, string tag) =>
-            TypeExtraMgr.RemoveTag(zombieType, tag);
+        /// <summary>
+        /// 注册二创子弹
+        /// </summary>
+        /// <typeparam name="TBase">子弹基类</typeparam>
+        /// <param name="customBullet">子弹数据</param>
+        readonly internal void RegisterCustomBullet<TBase>(CustomBullet customBullet) where TBase : Bullet
+        {
+            customBullet.Prefab.AddComponent<TBase>().theBulletType = customBullet.Id;
+
+            CustomBullets.AddAndLogIfDup(customBullet.Id, customBullet, $"Duplicate bullet id {(int)customBullet.Id}");
+        }
+
+        /// <summary>
+        /// 注册二创音效
+        /// </summary>
+        /// <param name="customSound">音效数据</param>
+        readonly internal void RegisterCustomSound(CustomSound customSound)
+        {
+            CustomSounds.AddAndLogIfDup(customSound.Id, customSound, $"Duplicate sound id {(int)customSound.Id}");
+        }
+
+        /// <summary>
+        /// 注册二创音乐
+        /// </summary>
+        /// <param name="customMusic">音乐数据</param>
+        readonly internal void RegisterCustomMusic(CustomMusic customMusic)
+        {
+            CustomMusics.AddAndLogIfDup(customMusic.Id, customMusic, $"Duplicate music id {(int)customMusic.Id}");
+        }
+
+        /// <summary>
+        /// 注册二创粒子
+        /// </summary>
+        /// <param name="customParticle">粒子数据</param>
+        readonly internal void RegisterCustomParticle(CustomParticle customParticle)
+        {
+            CustomParticles.AddAndLogIfDup(customParticle.Id, customParticle, $"Duplicate particle id {(int)customParticle.Id}");
+        }
+
         #region 数据
         /// <summary>
         /// 植物类型数据
@@ -99,6 +155,26 @@ namespace CustomizeLib.BepInEx.Internal.Datas
         /// <para>a: 底植物 b: 融合上去的植物 c: 融合结果</para>
         /// </summary>
         internal List<(ID a, ID b, ID res)> CustomFusions { get; set; } = [];
+
+        /// <summary>
+        /// 二创子弹
+        /// </summary>
+        internal Dictionary<BulletType, CustomBullet> CustomBullets { get; set; } = [];
+
+        /// <summary>
+        /// 二创音效
+        /// </summary>
+        internal Dictionary<SoundType, CustomSound> CustomSounds { get; set; } = [];
+
+        /// <summary>
+        /// 二创音乐
+        /// </summary>
+        internal Dictionary<MusicType, CustomMusic> CustomMusics { get; set; } = [];
+
+        /// <summary>
+        /// 二创粒子
+        /// </summary>
+        internal Dictionary<ParticleType, CustomParticle> CustomParticles { get; set; } = [];
         #endregion
     }
 }

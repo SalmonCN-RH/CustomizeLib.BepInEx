@@ -3,15 +3,28 @@
   "WorkspaceRootPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FCE85972-C601-3E31-0F23-6F886044FA5A}|\u89E3\u51B3\u65B9\u6848\u9879{FCE85972-C601-3E31-0F23-6F886044FA5A}|F:\\vsrepos\\CustomizeLib.BepInEx\\Directory.Build.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{FCE85972-C601-3E31-0F23-6F886044FA5A}|\u89E3\u51B3\u65B9\u6848\u9879{FCE85972-C601-3E31-0F23-6F886044FA5A}|solutionrelative:Directory.Build.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04626E98-39C5-6562-CB83-94D9CD7345E0}|Lib\\CustomizeLib.BepInEx.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\apitools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04626E98-39C5-6562-CB83-94D9CD7345E0}|Lib\\CustomizeLib.BepInEx.csproj|solutionrelative:lib\\apitools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\customcore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\customcore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\vsrepos\\tmp\\CustomizeLib.BepInEx\\CustomizeLib.BepInEx\\Class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\coretasks\\register\\regplants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\coretasks\\register\\regplants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\test\\featuretest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\test\\featuretest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\events\\imodtask\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\events\\imodtask\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,48 +33,89 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 400,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Tools.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Tools.cs",
+              "RelativeDocumentMoniker": "Lib\\Tools.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Tools.cs",
+              "RelativeToolTip": "Lib\\Tools.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA0wBgAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T12:17:17.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomCore.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomCore.cs",
+              "RelativeDocumentMoniker": "Lib\\CustomCore.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomCore.cs",
+              "RelativeToolTip": "Lib\\CustomCore.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAQwFQAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T12:04:37.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegPlants.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
+              "RelativeDocumentMoniker": "Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
+              "RelativeToolTip": "Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAACsAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T10:18:23.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Interfaces.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Interfaces.cs",
+              "RelativeDocumentMoniker": "Lib\\Interfaces.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Interfaces.cs",
+              "RelativeToolTip": "Lib\\Interfaces.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAD4v6IAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T09:40:34.552Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Directory.Build.props",
-              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Directory.Build.props",
-              "RelativeDocumentMoniker": "Directory.Build.props",
-              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Directory.Build.props",
-              "RelativeToolTip": "Directory.Build.props",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-09-11T18:54:15.852Z",
+              "DocumentIndex": 5,
+              "Title": "Tools.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IModTask\\Tools.cs",
+              "RelativeDocumentMoniker": "Lib\\Internal\\Events\\IModTask\\Tools.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IModTask\\Tools.cs",
+              "RelativeToolTip": "Lib\\Internal\\Events\\IModTask\\Tools.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T09:25:44.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FeatureTest.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs",
+              "RelativeDocumentMoniker": "Lib\\Internal\\Test\\FeatureTest.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs",
+              "RelativeToolTip": "Lib\\Internal\\Test\\FeatureTest.cs",
+              "ViewState": "AgIAABACAAAAAAAAAAAAwEMCAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T09:07:00.078Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "APITools.cs",
-              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\APITools.cs",
-              "RelativeDocumentMoniker": "Lib\\APITools.cs",
-              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\APITools.cs",
-              "RelativeToolTip": "Lib\\APITools.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T18:54:08.413Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "F:\\vsrepos\\tmp\\CustomizeLib.BepInEx\\CustomizeLib.BepInEx\\Class1.cs",
-              "RelativeDocumentMoniker": "..\\tmp\\CustomizeLib.BepInEx\\CustomizeLib.BepInEx\\Class1.cs",
-              "ToolTip": "F:\\vsrepos\\tmp\\CustomizeLib.BepInEx\\CustomizeLib.BepInEx\\Class1.cs",
-              "RelativeToolTip": "..\\tmp\\CustomizeLib.BepInEx\\CustomizeLib.BepInEx\\Class1.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T18:51:32.452Z"
             }
           ]
         }

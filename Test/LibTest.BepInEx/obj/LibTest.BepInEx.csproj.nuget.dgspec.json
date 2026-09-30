@@ -1,0 +1,205 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj": {}
+  },
+  "projects": {
+    "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj",
+        "projectName": "CustomizeLib.BepInEx_Re",
+        "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "framework": "net6.0",
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\BepInPriority.BepInEx.csproj": {
+                "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\BepInPriority.BepInEx.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net6.0": {
+          "framework": "net6.0",
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\BepInPriority.BepInEx.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\BepInPriority.BepInEx.csproj",
+        "projectName": "BepInPriority.BepInEx",
+        "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\BepInPriority.BepInEx.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Patcher\\BepInPriority.BepInEx\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "framework": "net6.0",
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net6.0": {
+          "framework": "net6.0",
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+        "projectName": "LibTest.BepInEx",
+        "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "framework": "net6.0",
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj": {
+                "projectPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\CustomizeLib.BepInEx_Re.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net6.0": {
+          "framework": "net6.0",
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

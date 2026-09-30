@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomizeLib.BepInEx.Internal.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,5 +31,25 @@ namespace CustomizeLib.BepInEx.Internal.Extensions
             if (obj is T t) return t;
             return default!;
         }
+
+        /// <summary>
+        /// 判断 <paramref name="obj"/> 是否是 <paramref name="type"/> 的子类
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <param name="type">基类</param>
+        /// <param name="containBase">是否包含基类</param>
+        /// <returns>是否是子类</returns>
+        internal static bool IsSubTypeOf(this object obj, Type type, bool containBase = true) =>
+            InternalTools.TypeTools_IsSubTypeOf(obj.GetType(), type, containBase);
+
+        /// <summary>
+        /// 判断 <paramref name="obj"/> 是否是 <typeparamref name="TBase"/> 的子类
+        /// </summary>
+        /// <typeparam name="TBase">基类</typeparam>
+        /// <param name="obj">对象</param>
+        /// <param name="containBase">是否包含基类</param>
+        /// <returns>是否是子类</returns>
+        internal static bool IsSubTypeOf<TBase>(this object obj, bool containBase = true) =>
+            InternalTools.TypeTools_IsSubTypeOf(obj.GetType(), typeof(TBase), containBase);
     }
 }

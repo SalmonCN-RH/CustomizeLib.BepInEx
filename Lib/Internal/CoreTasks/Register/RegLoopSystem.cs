@@ -1,5 +1,4 @@
-﻿using CustomizeLib.BepInEx.Internal.Events;
-using CustomizeLib.BepInEx.Internal.Extensions;
+﻿using CustomizeLib.BepInEx.Internal.Extensions;
 using CustomizeLib.BepInEx.Internal.Tools;
 using Il2CppInterop.Runtime.Injection;
 using System;
@@ -13,9 +12,12 @@ using UnityEngine.PlayerLoop;
 
 namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
 {
+    /// <summary>
+    /// 注入PlayerLoop
+    /// </summary>
     internal struct RegLoopSystem : ILoadTask
     {
-        readonly void IModTask.Do()
+        readonly void ILoadTask.OnLoad()
         {
             #region 类型注册
             ClassInjector.RegisterTypeInIl2Cpp<Culib_PreUpdate>();
@@ -32,8 +34,9 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
                 target: (loop) => InternalTools.PlayerLoopTools_CheckByType(loop, typeof(Update.ScriptRunBehaviourUpdate)), // 在 Update 执行之前
                 cons: () => InternalTools.PlayerLoopTools_ConsLoopSystem(typeof(Culib_PreUpdate), () =>
                 {
-                    // PreUpdate
+                    // Pre OnUpdate
                     IPlantEvent.EventMaps[IPlantEvent.EventType.OnUpdate].Invoke(Trigger.Pre, []);
+                    IPlantEvent.EventMaps[IPlantEvent.EventType.OnUpdateMustExecute].Invoke(Trigger.Pre, []);
                 }));
 
             root = InternalTools.PlayerLoopTools_AppendSystem(
@@ -41,8 +44,9 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
                 target: (loop) => InternalTools.PlayerLoopTools_CheckByType(loop, typeof(Update.ScriptRunBehaviourUpdate)), // 在 Update 执行之后
                 cons: () => InternalTools.PlayerLoopTools_ConsLoopSystem(typeof(Culib_PostUpdate), () =>
                 {
-                    // PostUpdate
+                    // Post OnUpdate
                     IPlantEvent.EventMaps[IPlantEvent.EventType.OnUpdate].Invoke(Trigger.Post, []);
+                    IPlantEvent.EventMaps[IPlantEvent.EventType.OnUpdateMustExecute].Invoke(Trigger.Post, []);
                 }));
             #endregion
 
@@ -52,8 +56,9 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
                 target: (loop) => InternalTools.PlayerLoopTools_CheckByType(loop, typeof(FixedUpdate.ScriptRunBehaviourFixedUpdate)), // 在 FixedUpdate 执行之前
                 cons: () => InternalTools.PlayerLoopTools_ConsLoopSystem(typeof(Culib_PreFixedUpdate), () =>
                 {
-                    // PreFixedUpdate
+                    // Pre OnFixedUpdate
                     IPlantEvent.EventMaps[IPlantEvent.EventType.OnFixedUpdate].Invoke(Trigger.Pre, []);
+                    IPlantEvent.EventMaps[IPlantEvent.EventType.OnFixedUpdateMustExecute].Invoke(Trigger.Pre, []);
                 }));
 
             root = InternalTools.PlayerLoopTools_AppendSystem(
@@ -61,8 +66,9 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks.Register
                 target: (loop) => InternalTools.PlayerLoopTools_CheckByType(loop, typeof(FixedUpdate.ScriptRunBehaviourFixedUpdate)), // 在 FixedUpdate 执行之后
                 cons: () => InternalTools.PlayerLoopTools_ConsLoopSystem(typeof(Culib_PostFixedUpdate), () =>
                 {
-                    // PostFixedUpdate
+                    // Post OnFixedUpdate
                     IPlantEvent.EventMaps[IPlantEvent.EventType.OnFixedUpdate].Invoke(Trigger.Post, []);
+                    IPlantEvent.EventMaps[IPlantEvent.EventType.OnFixedUpdateMustExecute].Invoke(Trigger.Post, []);
                 }));
             #endregion
 

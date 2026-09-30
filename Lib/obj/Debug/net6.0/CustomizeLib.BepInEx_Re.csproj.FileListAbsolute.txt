@@ -1,0 +1,16 @@
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.csproj.AssemblyReference.cache
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.GeneratedMSBuildEditorConfig.editorconfig
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.AssemblyInfoInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.AssemblyInfo.cs
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.csproj.CoreCompileInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.sourcelink.json
+F:\vsrepos\CustomizeLib.BepInEx\Lib\bin\Debug\net6.0\CustomizeLib.BepInEx_Re.deps.json
+F:\vsrepos\CustomizeLib.BepInEx\Lib\bin\Debug\net6.0\CustomizeLib.BepInEx_Re.dll
+F:\vsrepos\CustomizeLib.BepInEx\Lib\bin\Debug\net6.0\CustomizeLib.BepInEx_Re.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Lib\bin\Debug\net6.0\BepInPriority.BepInEx.dll
+F:\vsrepos\CustomizeLib.BepInEx\Lib\bin\Debug\net6.0\BepInPriority.BepInEx.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\Customiz.81EDE54B.Up2Date
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.dll
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\refint\CustomizeLib.BepInEx_Re.dll
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\CustomizeLib.BepInEx_Re.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Lib\obj\Debug\net6.0\ref\CustomizeLib.BepInEx_Re.dll

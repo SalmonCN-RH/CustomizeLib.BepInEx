@@ -4,6 +4,8 @@
     <File Path="LICENSE" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="Lib/CustomizeLib.BepInEx.csproj" />
+  <Project Path="../Customizelib/BepInEx/CustomizeLib.BepInEx/CustomizeLib.BepInEx.csproj" />
+  <Project Path="Lib/CustomizeLib.BepInEx_Re.csproj" />
   <Project Path="Patcher/BepInPriority.BepInEx/BepInPriority.BepInEx.csproj" />
+  <Project Path="Test/LibTest.BepInEx/LibTest.BepInEx.csproj" Id="d7224774-8f2e-485e-9d5f-3d17c809e6f8" />
 </Solution>

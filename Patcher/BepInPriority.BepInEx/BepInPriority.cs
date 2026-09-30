@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 public class BepInPriority : Attribute
 {
     public const int Low = 0;
-    public const int Default = 1;
-    public const int High = 2;
+    public const int Default = 400;
+    public const int High = 800;
 
     internal readonly int priority = Default;
 

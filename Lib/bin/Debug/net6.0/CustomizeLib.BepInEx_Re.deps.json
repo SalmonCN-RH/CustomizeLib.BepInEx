@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CustomizeLib.BepInEx_Re/1.0.0": {
+        "dependencies": {
+          "BepInPriority.BepInEx": "1.0.0"
+        },
+        "runtime": {
+          "CustomizeLib.BepInEx_Re.dll": {}
+        }
+      },
+      "BepInPriority.BepInEx/1.0.0": {
+        "runtime": {
+          "BepInPriority.BepInEx.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CustomizeLib.BepInEx_Re/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BepInPriority.BepInEx/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

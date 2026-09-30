@@ -1,5 +1,6 @@
 ﻿using CustomizeLib.BepInEx.Internal.Datas;
 using CustomizeLib.BepInEx.Internal.Mod;
+using CustomizeLib.BepInEx.Internal.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks
         // 优先做初始化
         readonly int IModTask.GetOrder() => IModTask.Low;
 
-        readonly void IModTask.Do()
+        readonly void ILoadTask.OnLoad()
         {
             // 初始化数据类
             LibData.Instance = new();
@@ -26,7 +27,7 @@ namespace CustomizeLib.BepInEx.Internal.CoreTasks
             LibData.Instance.Logger = ModCore.Instance.Log;
 
             // 初始化控制台
-            Console.OutputEncoding = Encoding.UTF8;
+            InternalTools.ConsoleTools_SetOutputEncoding();
         }
     }
 }

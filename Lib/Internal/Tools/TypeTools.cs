@@ -172,6 +172,75 @@ namespace CustomizeLib.BepInEx.Internal.Tools
             return (method, method != null);
         }
 
+        /// <summary>
+        /// 获取 <paramref name="types"/> 中所有拥有特性 <paramref name="attribute"/> 的成员
+        /// </summary>
+        /// <typeparam name="TMember">成员类型</typeparam>
+        /// <param name="types">类型列表</param>
+        /// <param name="attribute">特性类</param>
+        /// <param name="get">获取方法</param>
+        /// <param name="inherit">是否继承</param>
+        /// <returns>成员列表</returns>
+        internal static IEnumerable<TMember> GetAttrWith<TMember>(IEnumerable<Type> types, Type attribute, Func<Type, IEnumerable<TMember>> get, bool inherit = false) where TMember : MemberInfo =>
+            types.SelectMany(get).Where(m => m.IsDefined(attribute, inherit));
+
+        /// <summary>
+        /// 获取方法列表
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="name">名称 (.ctor = 构造函数)</param>
+        /// <param name="genericArgCount">泛型方法数</param>
+        /// <param name="paramTypes">参数列表</param>
+        /// <param name="flags">搜索条件</param>
+        /// <remarks>
+        /// <para> <paramref name="name"/> = .ctor: 搜索构造函数 </para>
+        /// <para> <paramref name="name"/> =  null: 搜索所有方法 </para>
+        /// <para> <paramref name="paramTypes"/> : 元素为 null 时, 代表此位置可为任意类型 </para>
+        /// </remarks>
+        /// <returns>方法列表</returns>
+        internal static MethodBase[] GetMethods(
+            Type type,
+            string? name = null,
+            int? genericArgCount = null,
+            Type?[]? paramTypes = null,
+            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
+        {
+            IEnumerable<MethodBase> src = [];
+            if (name == null)
+                src = type.GetMethods(flags).Cast<MethodBase>().Concat(type.GetConstructors(flags));
+            else if (name == ".ctor")
+                src = type.GetConstructors(flags);
+            else
+                src = type.GetMethods(flags).Where(m => m.Name == name);
+
+            var result = src.Where(m =>
+            {
+                if (genericArgCount != null && m is MethodInfo mi && (mi.IsGenericMethod ? mi.GetGenericArguments().Length : 0) != genericArgCount)
+                    return false;
+
+                if (paramTypes != null)
+                {
+                    var paramArr = m.GetParameters();
+                    if (paramArr.Length != paramTypes.Length) return false;
+                    for (int i = 0; i < paramArr.Length; ++i)
+                    {
+                        // continue = 符合条件
+                        // return false = 不符合条件
+                        var target = paramTypes[i];
+                        var real = paramArr[i].ParameterType;
+                        if (target == null) continue;
+                        if (real == target) continue;
+                        if (target.IsGenericTypeDefinition && real.IsGenericType && real.GetGenericTypeDefinition() == target) continue;
+                        return false;
+                    }
+                }
+
+                return true;
+            }).ToArray();
+
+            return result.Length > 0 ? result : [];
+        }
+
         internal static MethodInfo? TryGetMethod(Type type, string name, BindingFlags flags) => type.GetMethod(name, flags);
         internal static bool HasMethod(Type type, string name, BindingFlags flags) => TryGetMethod(type, name, flags) != null;
     }
