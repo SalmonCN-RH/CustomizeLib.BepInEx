@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "F:\\vsrepos\\CustomizeLib.BepInEx\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D7224774-8F2E-485E-9D5F-3D17C809E6F8}|Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj|f:\\vsrepos\\customizelib.bepinex\\test\\libtest.bepinex\\libtest.bepinex.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D7224774-8F2E-485E-9D5F-3D17C809E6F8}|Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj|solutionrelative:test\\libtest.bepinex\\libtest.bepinex.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7224774-8F2E-485E-9D5F-3D17C809E6F8}|Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj|f:\\vsrepos\\customizelib.bepinex\\test\\libtest.bepinex\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7224774-8F2E-485E-9D5F-3D17C809E6F8}|Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj|solutionrelative:test\\libtest.bepinex\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\test\\featuretest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\test\\featuretest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\events\\ivtablehook\\ivtablehook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\events\\ivtablehook\\ivtablehook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\coretasks\\register\\regplants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\coretasks\\register\\regplants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|f:\\vsrepos\\customizelib.bepinex\\lib\\internal\\events\\imodtask\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6257100A-5CEC-9381-1EE2-6A8413D2FAB8}|Lib\\CustomizeLib.BepInEx_Re.csproj|solutionrelative:lib\\internal\\events\\imodtask\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,62 +30,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 400,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RegPlants.cs",
-              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
-              "RelativeDocumentMoniker": "Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
-              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
-              "RelativeToolTip": "Lib\\Internal\\CoreTasks\\Register\\RegPlants.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T10:18:23.968Z",
+              "DocumentIndex": 0,
+              "Title": "LibTest.BepInEx",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+              "RelativeDocumentMoniker": "Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+              "RelativeToolTip": "Test\\LibTest.BepInEx\\LibTest.BepInEx.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-04T11:57:00.722Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\Class1.cs",
+              "RelativeDocumentMoniker": "Test\\LibTest.BepInEx\\Class1.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Test\\LibTest.BepInEx\\Class1.cs",
+              "RelativeToolTip": "Test\\LibTest.BepInEx\\Class1.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvzQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T11:53:00.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IVTableHook.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IVTableHook\\IVTableHook.cs",
+              "RelativeDocumentMoniker": "Lib\\Internal\\Events\\IVTableHook\\IVTableHook.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IVTableHook\\IVTableHook.cs",
+              "RelativeToolTip": "Lib\\Internal\\Events\\IVTableHook\\IVTableHook.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-04T05:55:27.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FeatureTest.cs",
+              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs",
+              "RelativeDocumentMoniker": "Lib\\Internal\\Test\\FeatureTest.cs",
+              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs",
+              "RelativeToolTip": "Lib\\Internal\\Test\\FeatureTest.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAAANQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-03T11:35:00.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Interfaces.cs",
               "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Interfaces.cs",
               "RelativeDocumentMoniker": "Lib\\Interfaces.cs",
               "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Interfaces.cs",
               "RelativeToolTip": "Lib\\Interfaces.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAMwHAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T09:40:34.552Z",
+              "WhenOpened": "2026-10-04T05:48:11.076Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Tools.cs",
-              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IModTask\\Tools.cs",
-              "RelativeDocumentMoniker": "Lib\\Internal\\Events\\IModTask\\Tools.cs",
-              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Events\\IModTask\\Tools.cs",
-              "RelativeToolTip": "Lib\\Internal\\Events\\IModTask\\Tools.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T09:25:44.446Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FeatureTest.cs",
-              "DocumentMoniker": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs",
-              "RelativeDocumentMoniker": "Lib\\Internal\\Test\\FeatureTest.cs",
-              "ToolTip": "F:\\vsrepos\\CustomizeLib.BepInEx\\Lib\\Internal\\Test\\FeatureTest.cs*",
-              "RelativeToolTip": "Lib\\Internal\\Test\\FeatureTest.cs*",
-              "ViewState": "AgIAADQCAAAAAAAAAAAAwEYCAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T09:07:00.078Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -82,16 +82,16 @@ namespace CustomizeLib.BepInEx.Internal.Test
                     //SystemAPI.VirtualProtectEx(Process.GetCurrentProcess().Handle, vTableAddr, (UIntPtr)(sizeof(VirtualInvokeData*) * cls.VtableCount),
                     //    old, out var _);
 
-                    SystemAPI.VirtualProtectEx(Process.GetCurrentProcess().Handle, cls.VTable, (UIntPtr)(sizeof(VirtualInvokeData*) * cls.VtableCount),
-                        (uint)SystemAPITools.VirtualProtectExProtection.PAGE_EXECUTE_READWRITE, out var old);
+                    //SystemAPI.VirtualProtectEx(Process.GetCurrentProcess().Handle, cls.VTable, (UIntPtr)(sizeof(VirtualInvokeData*) * cls.VtableCount),
+                    //    (uint)SystemAPITools.VirtualProtectExProtection.PAGE_EXECUTE_READWRITE, out var old);
 
-                    ((VirtualInvokeData*)cls.VTable)[39].methodPtr = Marshal.GetFunctionPointerForDelegate<AttributeEventDelegate>(CustomAttributeEvent);
-                    var tmp = UnityVersionHandler.Wrap(((VirtualInvokeData*)cls.VTable)[39].method);
-                    tmp.MethodPointer = tmp.VirtualMethodPointer = Marshal.GetFunctionPointerForDelegate<AttributeEventDelegate>(CustomAttributeEvent);
-                    ((VirtualInvokeData*)cls.VTable)[39].method = tmp.MethodInfoPointer;
+                    //((VirtualInvokeData*)cls.VTable)[39].methodPtr = Marshal.GetFunctionPointerForDelegate<AttributeEventDelegate>(CustomAttributeEvent);
+                    //var tmp = UnityVersionHandler.Wrap(((VirtualInvokeData*)cls.VTable)[39].method);
+                    //tmp.MethodPointer = tmp.VirtualMethodPointer = Marshal.GetFunctionPointerForDelegate<AttributeEventDelegate>(CustomAttributeEvent);
+                    //((VirtualInvokeData*)cls.VTable)[39].method = tmp.MethodInfoPointer;
 
-                    SystemAPI.VirtualProtectEx(Process.GetCurrentProcess().Handle, cls.VTable, (UIntPtr)(sizeof(VirtualInvokeData*) * cls.VtableCount),
-                        old, out var _);
+                    //SystemAPI.VirtualProtectEx(Process.GetCurrentProcess().Handle, cls.VTable, (UIntPtr)(sizeof(VirtualInvokeData*) * cls.VtableCount),
+                    //    old, out var _);
                 }
                 catch (Exception ex)
                 {
@@ -154,8 +154,63 @@ namespace CustomizeLib.BepInEx.Internal.Test
                     Logger.LogInfo($"{ptr.methodPtr:X} {strc}");
                 }
             }
-            _ = T();
+            // _ = T();
             Logger.LogInfo(GetSize(typeof(NativeClassStructHandler_29_1).Assembly.GetType("Il2CppInterop.Runtime.Runtime.VersionSpecific.Class.NativeClassStructHandler_29_1+Il2CppClass_29_1")));
+
+            //var funcptr = ((IVTableHook<TestDelegate>)new VTableHookTest()).Wrap(42);
+
+            //// 方式一：转回委托调用
+            //var del = Marshal.GetDelegateForFunctionPointer<TestDelegate>(funcptr);
+            //del((IntPtr)1, (IntPtr)2);
+            _ = MyTest();
+        }
+
+        public static unsafe INativeClassStruct Get() => UnityVersionHandler.Wrap((Il2CppClass*)Il2CppClassPointerStore.GetNativeClassPointer(typeof(Plant)));
+        public static unsafe VirtualInvokeData Access(IntPtr vtable, int slot) => ((VirtualInvokeData*)vtable)[slot];
+
+        public static async Task MyTest()
+        {
+            IL2CPP.il2cpp_runtime_class_init(Il2CppClassPointerStore.GetNativeClassPointer(typeof(Plant)));
+            var clzPtr = Get();
+            var vtable = (VirtualInvokeData*)clzPtr.VTable;
+            var data = Access((IntPtr)vtable, 39);
+
+            while (data.methodPtr == IntPtr.Zero)
+            {
+                await Task.Delay(100);
+                Logger.LogWarning("waiting");
+                clzPtr = Get();
+                vtable = (VirtualInvokeData*)clzPtr.VTable;
+                data = Access((IntPtr)vtable, 39);
+            }
+            Logger.LogWarning($"vtable = {(IntPtr)vtable:X}, {data.methodPtr:X} , slot = {InternalTools.DetourTools_GetMethod(typeof(Plant), nameof(Plant.AttributeEvent)).Slot}");
+        }
+    }
+
+    [HarmonyPatch(typeof(MelonFume))]
+    public static class MelonFumePatch
+    {
+        [HarmonyPatch(nameof(MelonFume.AttributeEvent))]
+        [HarmonyPrefix]
+        public static void PreAttributeEvent(MelonFume __instance)
+        {
+            Logger.LogInfo($"attr on {__instance.thePlantColumn} {__instance.thePlantRow}");
+        }
+    }
+
+    public delegate void TestDelegate(IntPtr plant, float timer, [MarshalAs(UnmanagedType.I1)] bool force, IntPtr method);
+    public struct VTableHookTest : IVTableHook<TestDelegate>
+    {
+        public TestDelegate GetHookFunction() => Hook;
+
+        public readonly IVTableHook<TestDelegate>.VTableHookTarget[] GetHookTargets() =>
+            [
+                new(typeof(PeaShooter), InternalTools.DetourTools_GetMethod(typeof(PeaShooter), nameof(PeaShooter.TryBeDisable)).Slot)
+            ];
+
+        public void Hook(IntPtr plant, float timer, [MarshalAs(UnmanagedType.I1)] bool force, IntPtr method)
+        {
+            // this.GetOriginals()[this.GetCallingIdx()].Invoke(arg0, method);
         }
     }
 
@@ -166,6 +221,9 @@ namespace CustomizeLib.BepInEx.Internal.Test
             Logger.LogInfo($"{trigger} {data.thePlantType}");
         }
     }
+
+    [return: MarshalAs(UnmanagedType.U1)]
+    public delegate bool PlantAwake(IntPtr @this, bool a, IntPtr method);
 
     //internal struct MyTestDetour : IDetourHook<PlantAwake>
     //{
@@ -182,7 +240,7 @@ namespace CustomizeLib.BepInEx.Internal.Test
 
     //    public void Hook(IntPtr plant, IntPtr method)
     //    {
-    //        IL2CPPDetour
+    //        this.GetHookFunction().Invoke(plant, method);
     //        Logger.LogInfo($"log by custom detour hook {this.GetCallOriginalIdx()} {++Counter}");
     //        this.GetOriginals()[0].Invoke(plant, method);
     //    }

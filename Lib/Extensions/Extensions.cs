@@ -125,20 +125,30 @@ namespace CustomizeLib.BepInEx.Extensions
             Internal.Extensions.TypeExtensions.Il2CppType(type);
         #endregion
 
-        #region IApplyDetourExtensions
-        /// <inheritdoc cref="IApplyDetourExtensions.GetOriginals{TDelegate}(IDetourHook{TDelegate})"/>
-        public static TDelegate[] GetOriginals<TDelegate>(this IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
-            IApplyDetourExtensions.GetOriginals(detour);
+        #region IDetourHookExtensions
+        /// <inheritdoc cref="IDetourHookExtensions.GetOriginal{TDelegate}(IDetourHook{TDelegate})"/>
+        public static TDelegate GetOriginal<TDelegate>(this IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
+            IDetourHookExtensions.GetOriginal(detour);
 
-        /// <inheritdoc cref="IApplyDetourExtensions.GetDetours{TDelegate}(IDetourHook{TDelegate})"/>
-        public static INativeDetour[] GetDetours<TDelegate>(IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
-            IApplyDetourExtensions.GetDetours(detour);
+        /// <inheritdoc cref="IDetourHookExtensions.GetDetour{TDelegate}(IDetourHook{TDelegate})"/>
+        public static INativeDetour GetDetour<TDelegate>(IDetourHook<TDelegate> detour) where TDelegate : Delegate =>
+            IDetourHookExtensions.GetDetour(detour);
         #endregion
 
         #region IEnumerableExtensions
         /// <inheritdoc cref="IEnumerableExtensions.DoAll{T}(IEnumerable{T}, Action{T})"/>
         public static IEnumerable<T> DoAll<T>(this IEnumerable<T> enumerable, Action<T> action) =>
             IEnumerableExtensions.DoAll(enumerable, action);
+        #endregion
+
+        #region IVTableHookExtensions
+        /// <inheritdoc cref="IVTableHookExtensions.GetOriginals{TDelegate}(IVTableHook{TDelegate})"/>
+        internal static TDelegate[] GetOriginals<TDelegate>(this IVTableHook<TDelegate> hook) where TDelegate : Delegate =>
+            IVTableHookExtensions.GetOriginals(hook);
+
+        /// <inheritdoc cref="IVTableHookExtensions.GetCallingIdx{TDelegate}(IVTableHook{TDelegate})"/>
+        public static uint GetCallingIdx<TDelegate>(this IVTableHook<TDelegate> hook) where TDelegate : Delegate =>
+            IVTableHookExtensions.GetCallingIdx(hook);
         #endregion
     }
 }

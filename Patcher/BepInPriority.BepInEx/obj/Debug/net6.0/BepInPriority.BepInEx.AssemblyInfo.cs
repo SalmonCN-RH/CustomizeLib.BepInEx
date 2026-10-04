@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BepInPriority.BepInEx")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbc6c1bf7799eb63ee3ea1ffec38768686038d3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54d0a1ac3a12a372adec0616ce7fdf47940681d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("BepInPriority.BepInEx")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BepInPriority.BepInEx")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

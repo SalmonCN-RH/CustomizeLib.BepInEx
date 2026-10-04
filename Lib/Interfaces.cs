@@ -80,58 +80,65 @@ namespace CustomizeLib.BepInEx
 
     public partial interface IDetourHook<TDelegate> : IGenericTask where TDelegate : Delegate
     {
-        public new IDetourHookData CachedData
+        public new DetourHookData CachedData
         {
-            get => GetCachedData<IDetourHookData>();
+            get => GetCachedData<DetourHookData>();
             set => SetCachedData(value);
         }
 
-        public INativeDetour[] Detours
+        public INativeDetour Detour
         {
-            get => CachedData.Detours;
+            get => CachedData.Detour;
             set => CachedData = new()
             {
-                Detours = value,
-                Originals = CachedData.Originals,
-                CallOriginalIdx = CachedData.CallOriginalIdx
+                Detour = value,
+                Original = CachedData.Original
             };
         }
-        public TDelegate[] Originals
+        public TDelegate Original
         {
-            get => CachedData.Originals;
+            get => CachedData.Original;
             set => CachedData = new()
             {
-                Detours = CachedData.Detours,
-                Originals = value,
-                CallOriginalIdx = CachedData.CallOriginalIdx
+                Detour = CachedData.Detour,
+                Original = value,
             };
         }
-        public int CallOriginalIdx
-        {
-            get => CachedData.CallOriginalIdx;
-            set => CachedData = new()
-            {
-                Detours = CachedData.Detours,
-                Originals = CachedData.Originals,
-                CallOriginalIdx = value
-            };
-        }
-
-        public IEnumerable<IntPtr> GetHookTargets();
+        public DetourHookTarget GetHookTarget();
         public TDelegate GetHookFunction();
 
         public void OnApplyHook() { }
     }
 
-    public partial interface IVTableHook<TDelegate> : IGenericTask where TDelegate : Delegate
+    public partial interface IVTableHook<TDelegate> : IGameAppEvent where TDelegate : Delegate
     {
-        public new IVTableHookData CachedData
+        public new VTableHookData CachedData
         {
-            get => GetCachedData<IVTableHookData>();
+            get => GetCachedData<VTableHookData>();
             set => SetCachedData(value);
         }
 
-        public IVTableHookData GetVTableHookInfo();
+        public TDelegate[] Originals
+        {
+            get => CachedData.Originals;
+            set => CachedData = new()
+            {
+                Originals = value,
+                CallingIdx = CachedData.CallingIdx
+            };
+        }
+        public uint CallingIdx
+        {
+            get => CachedData.CallingIdx;
+            set => CachedData = new()
+            {
+                Originals = CachedData.Originals,
+                CallingIdx = value
+            };
+        }
+
+        public VTableHookTarget[] GetHookTargets();
+        public TDelegate GetHookFunction();
 
         public void OnApplyHook() { }
     }

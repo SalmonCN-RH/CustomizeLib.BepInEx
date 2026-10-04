@@ -98,11 +98,19 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         /// <summary>
         /// 获取 Il2Cpp 的方法
         /// </summary>
+        /// <param name="method">方法</param>
+        /// <returns>方法结构体</returns>
+        internal static INativeMethodInfoStruct GetMethod(MethodBase method) =>
+            GetMethod(method.DeclaringType!, method);
+
+        /// <summary>
+        /// 获取 Il2Cpp 的方法
+        /// </summary>
         /// <param name="type">类型</param>
         /// <param name="methodName">方法</param>
         /// <returns>方法结构体</returns>
         internal static INativeMethodInfoStruct GetMethod(Type type, string methodName) =>
-            GetMethod(type, type.GetMethod(methodName, InternalTools.TypeTools_DefaultDeclaredOnly)!);
+            GetMethod(type.GetMethod(methodName, InternalTools.TypeTools_DefaultFlag)!);
 
         /// <summary>
         /// 获取 Il2Cpp 的构造函数
@@ -111,7 +119,7 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         /// <param name="argTypes">参数</param>
         /// <returns>方法结构体</returns>
         internal static INativeMethodInfoStruct GetConstructor(Type type, params Type[] argTypes) =>
-            GetMethod(type, type.GetConstructor(InternalTools.TypeTools_DefaultDeclaredOnly.RemoveStatic(), argTypes)!);
+            GetMethod(type.GetConstructor(InternalTools.TypeTools_DefaultFlag.RemoveStatic(), argTypes)!);
 
         /// <summary>
         /// 获取 Il2Cpp 的静态构造函数
@@ -119,6 +127,6 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         /// <param name="type">类型</param>
         /// <returns>方法结构体</returns>
         internal static INativeMethodInfoStruct GetStaticConstructor(Type type) =>
-            GetMethod(type, type.TypeInitializer!);
+            GetMethod(type.TypeInitializer!);
     }
 }

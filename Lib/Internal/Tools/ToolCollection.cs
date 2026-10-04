@@ -247,6 +247,10 @@ namespace CustomizeLib.BepInEx.Internal.Tools
         internal static INativeMethodInfoStruct DetourTools_GetMethod(Type type, MethodBase method) =>
             DetourTools.GetMethod(type, method);
 
+        /// <inheritdoc cref="DetourTools.GetMethod(MethodBase)"/>
+        internal static INativeMethodInfoStruct DetourTools_GetMethod(MethodBase method) =>
+            DetourTools.GetMethod(method);
+
         /// <inheritdoc cref="DetourTools.GetMethod(Type, string)"/>
         internal static INativeMethodInfoStruct DetourTools_GetMethod(Type type, string methodName) =>
             DetourTools.GetMethod(type, methodName);
