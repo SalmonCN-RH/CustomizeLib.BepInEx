@@ -2,13 +2,13 @@
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Unity.IL2CPP.Hook;
 using CustomizeLib.BepInEx.Internal.Auxiliary;
-using CustomizeLib.BepInEx.Internal.Extensions.EventExtensions;
-using CustomizeLib.BepInEx.Internal.Tools;
 using Cysharp.Threading.Tasks;
 using HarmonyLib;
 using Il2CppInterop.Runtime;
+using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.Runtime;
 using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
+using Microsoft.Extensions.Logging;
 using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 using System.Diagnostics;
@@ -16,6 +16,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using UnityEngine;
 
 namespace CustomizeLib.BepInEx.Internal.Test
@@ -105,9 +106,6 @@ namespace CustomizeLib.BepInEx.Internal.Test
                     Logger.LogInfo($"aft i = {i}, {invoke.methodPtr:X} {m.MethodPointer:X} {Marshal.PtrToStringUTF8(m.Name)}");
                 }
 
-                plant.AttributeEvent();
-                var e = new TestEvent();
-                e.Bind(plant);
                 // var d = Marshal.GetDelegateForFunctionPointer<AttributeEventDelegate>(vtable[39].methodPtr);
                 // d.Invoke(plant.Pointer, IntPtr.Zero);
             }
@@ -125,6 +123,22 @@ namespace CustomizeLib.BepInEx.Internal.Test
 
         readonly void ILoadTask.OnLoad()
         {
+            //LoggerWrapper.RemoveLevel(LogLevel.Error);
+            Utils.LoggerUtils.DisableLog(3);
+            //LoggerWrapper.AddOnLog(args =>
+            //{
+            //    if ((MSLogLevel)args[1]! != MSLogLevel.Error) return;
+            //    var sb = new StringBuilder();
+            //    foreach (var obj in args)
+            //        sb.AppendLine(obj?.ToString());
+            //    foreach (var frame in new StackTrace().GetFrames())
+            //        sb.AppendLine($"{frame}");
+            //    Logger.LogInfo(sb.ToString());
+            //});
+            IGameAppEvent.AddCallback(new(GameAppEvent.PostStart | GameAppEvent.PostAwake, () =>
+            {
+                Logger.LogInfo("post start or awake");
+            }));
             // 安装
             // PlantAttributeEventHook.Install();
 
@@ -163,6 +177,7 @@ namespace CustomizeLib.BepInEx.Internal.Test
             //var del = Marshal.GetDelegateForFunctionPointer<TestDelegate>(funcptr);
             //del((IntPtr)1, (IntPtr)2);
             _ = MyTest();
+            CustomCore.AddTag(PlantType.SunFlower, PlantTags.IsPuff);
         }
 
         public static unsafe INativeClassStruct Get() => UnityVersionHandler.Wrap((Il2CppClass*)Il2CppClassPointerStore.GetNativeClassPointer(typeof(Plant)));
@@ -177,13 +192,13 @@ namespace CustomizeLib.BepInEx.Internal.Test
 
             while (data.methodPtr == IntPtr.Zero)
             {
-                await Task.Delay(100);
+                await Task.Delay(1000);
                 Logger.LogWarning("waiting");
                 clzPtr = Get();
                 vtable = (VirtualInvokeData*)clzPtr.VTable;
                 data = Access((IntPtr)vtable, 39);
             }
-            Logger.LogWarning($"vtable = {(IntPtr)vtable:X}, {data.methodPtr:X} , slot = {InternalTools.DetourTools_GetMethod(typeof(Plant), nameof(Plant.AttributeEvent)).Slot}");
+            Logger.LogWarning($"vtable = {(IntPtr)vtable:X}, {data.methodPtr:X} , slot = {Utils.DetourUtils.GetMethod(typeof(Plant), nameof(Plant.AttributeEvent)).Slot}");
         }
     }
 
@@ -198,29 +213,37 @@ namespace CustomizeLib.BepInEx.Internal.Test
         }
     }
 
-    public delegate void TestDelegate(IntPtr plant, float timer, [MarshalAs(UnmanagedType.I1)] bool force, IntPtr method);
+    public delegate void TestDelegate(IntPtr plant, IntPtr method);
     public struct VTableHookTest : IVTableHook<TestDelegate>
     {
+        public static Harmony Harmony { get; set; }
+
         public TestDelegate GetHookFunction() => Hook;
 
-        public readonly IVTableHook<TestDelegate>.VTableHookTarget[] GetHookTargets() =>
+        public readonly VTableHookTarget[] GetHookTargets() =>
             [
-                new(typeof(PeaShooter), InternalTools.DetourTools_GetMethod(typeof(PeaShooter), nameof(PeaShooter.TryBeDisable)).Slot)
+                new(typeof(PeaShooter), Utils.DetourUtils.GetMethod(typeof(PeaShooter), nameof(PeaShooter.AttributeEvent)).Slot)
             ];
 
-        public void Hook(IntPtr plant, float timer, [MarshalAs(UnmanagedType.I1)] bool force, IntPtr method)
+        public readonly void Hook(IntPtr plant, IntPtr method)
         {
-            // this.GetOriginals()[this.GetCallingIdx()].Invoke(arg0, method);
+            Logger.LogInfo("vtb hook prefix");
+            this.CallCurrent([plant, method]);
+            Logger.LogInfo("vtb hook postfix");
+        }
+
+        public readonly void OnApplyHook()
+        {
+            //Harmony = new("salmon.test.id");
+            //Harmony.Patch(AccessTools.Method(typeof(PeaShooter), nameof(PeaShooter.AttributeEvent)), postfix: new(((Delegate)MyHarmony).Method));
+        }
+
+        public static void MyHarmony(Plant __instance)
+        {
+            Logger.LogInfo("plant attribute");
         }
     }
 
-    public class TestEvent : IPlantEvent
-    {
-        void IPlantEvent.BeforeSerialized(Trigger trigger, SavePlantData data)
-        {
-            Logger.LogInfo($"{trigger} {data.thePlantType}");
-        }
-    }
 
     [return: MarshalAs(UnmanagedType.U1)]
     public delegate bool PlantAwake(IntPtr @this, bool a, IntPtr method);
@@ -636,4 +659,28 @@ namespace CustomizeLib.BepInEx.Internal.Test
     //        Log($"  是否已 hook = {_originalPtrByClass.ContainsKey(klassPtr)}");
     //    }
     //}
+
+    [RegisterTypeInIl2Cpp(disableErrorMessage: false)]
+    public class TestPeashooter : MonoBehaviour, IGameAppEvent
+    {
+        public TestPeashooter(IntPtr ptr) : base(ptr) { }
+        public TestPeashooter() : base(ClassInjector.DerivedConstructorPointer<TestPeashooter>()) => ClassInjector.DerivedConstructorBody(this);
+
+        public void OnEvent()
+        {
+            Logger.LogInfo("tst");
+        }
+
+        GameAppEvent IGameAppEvent.Filter => GameAppEvent.PostAwake;
+    }
+    public class B : MonoBehaviour, IModData
+    {
+        public B(IntPtr ptr) : base(ptr) { }
+        public B() : base(ClassInjector.DerivedConstructorPointer<B>()) => ClassInjector.DerivedConstructorBody(this);
+
+        public void OnInit()
+        {
+            Logger.LogInfo("tst");
+        }
+    }
 }

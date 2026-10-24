@@ -65,17 +65,6 @@ namespace CustomizeLib.BepInEx
         #endregion
 
         #region 工具方法
-        /// <inheritdoc cref="ModImpl.GetAssetBundle(Assembly, string)"/>
-        public static AssetBundle GetAssetBundle(Assembly assembly, string name) => ModImpl.GetAssetBundle(assembly, name);
-
-        /// <summary>
-        /// 获取嵌入dll里的ab包 (调用方dll)
-        /// </summary>
-        /// <param name="name">名称</param>
-        /// <returns>ab包</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public static AssetBundle GetAssetBundle(string name) => ModImpl.GetAssetBundle(Assembly.GetCallingAssembly(), name);
-
         /// <inheritdoc cref="ModImpl.PlaySound(AudioClip, float)"/>
         public static void PlaySound(AudioClip audio, float volume = 1.0f) => ModImpl.PlaySound(audio, volume);
         #endregion

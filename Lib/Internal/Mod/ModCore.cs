@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Unity.IL2CPP;
-using CustomizeLib.BepInEx.Internal.Tools;
 using System.Reflection;
 
 namespace CustomizeLib.BepInEx.Internal.Mod
@@ -15,12 +14,12 @@ namespace CustomizeLib.BepInEx.Internal.Mod
         {
             Instance = this;
 
-            var dlls = InternalTools.TypeTools_GetAllAssemblies();
+            var dlls = Utils.TypeUtils.GetAllAssemblies();
 
-            var methods = InternalTools.TypeTools_GetAllMethods(
-                types: [.. InternalTools.TypeTools_GetAllDerivedTypes<IModTask>(InternalTools.TypeTools_GetAllAssemblies()).
-                                Where(t => t != typeof(IInitTask) && !t.IsGenericType)],
-                filter: (t) => InternalTools.TypeTools_TryGetMethodWithFlag(t, "RunAll", InternalTools.TypeTools_DefaultDeclaredOnly));
+            var methods = Utils.TypeUtils.GetAllMethods(
+                types: [.. Utils.TypeUtils.GetAllDerivedTypes<ILoadTask>(Utils.TypeUtils.GetAllAssemblies()).Where(t => !t.IsGenericType), 
+                        .. Utils.TypeUtils.GetAllDerivedTypes<IGenericTask>(Utils.TypeUtils.GetAllAssemblies()).Where(t => !t.IsGenericType)],
+                filter: (t) => Utils.TypeUtils.TryGetMethodWithFlag(t, "RunAll", Utils.TypeUtils.DefaultDeclaredOnly));
             foreach (var method in methods)
             {
                 try
@@ -30,13 +29,15 @@ namespace CustomizeLib.BepInEx.Internal.Mod
                 catch (Exception ex)
                 {
                     Logger.LogError(
-                        $"Error in execute IModTask: \n" +
+                        $"Error in execute ILoadTask or IGenericTask: \n" +
                         $"Message: {ex.Message}\n" +
                         $"{ex.StackTrace}\n" +
                         $"ToString: \n" +
                         $"{ex}");
                 }
             }
+
+            IModTask.RunAllCallback<ILoadTask>([]);
         }
     }
 }

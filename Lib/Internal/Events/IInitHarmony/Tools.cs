@@ -1,4 +1,4 @@
-﻿using CustomizeLib.BepInEx.Internal.CoreTasks;
+﻿using CustomizeLib.BepInEx.Internal.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,5 @@
 ﻿using BepInEx.Unity.IL2CPP.Hook;
 using CustomizeLib.BepInEx.Internal;
-using CustomizeLib.BepInEx.Internal.Tools;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -9,11 +8,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using static UnityEngine.UI.Image;
 
 namespace CustomizeLib.BepInEx
 {
     #region Mod事件
+    /// <summary>
+    /// 所有 Task 的基类
+    /// </summary>
     public partial interface IModTask
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace CustomizeLib.BepInEx
         /// <summary>
         /// 加载顺序, 值小的优先
         /// </summary>
-        public int GetOrder() => Default;
+        public int GetOrder() => CuLibPriority.Default;
 
         /// <summary>
         /// 当触发时
@@ -58,12 +59,18 @@ namespace CustomizeLib.BepInEx
     /// </summary>
     public partial interface IGenericTask : IModTask { }
 
+    /// <summary>
+    /// 当 Lib 执行时执行
+    /// </summary>
     public partial interface ILoadTask : IModTask 
     {
         public void OnLoad();
         void IModTask.Do() => OnLoad();
     }
 
+    /// <summary>
+    /// 当 GameAPP 执行指定方法时执行
+    /// </summary>
     public partial interface IGameAppEvent : IModTask
     {
         public GameAppEvent Filter => GameAppEvent.Default;
@@ -72,17 +79,24 @@ namespace CustomizeLib.BepInEx
         void IModTask.Do() => OnEvent();
     }
 
+    /// <summary>
+    /// 在所有一般插件加载前执行
+    /// </summary>
     public partial interface IInitTask : IModTask 
     {
         public void OnInit();
         void IModTask.Do() => OnInit();
     }
 
+    /// <summary>
+    /// 基于 INativeDetour 的 Hook
+    /// </summary>
+    /// <typeparam name="TDelegate">函数签名</typeparam>
     public partial interface IDetourHook<TDelegate> : IGenericTask where TDelegate : Delegate
     {
-        public new DetourHookData CachedData
+        public new DetourHookData<TDelegate> CachedData
         {
-            get => GetCachedData<DetourHookData>();
+            get => GetCachedData<DetourHookData<TDelegate>>();
             set => SetCachedData(value);
         }
 
@@ -110,11 +124,15 @@ namespace CustomizeLib.BepInEx
         public void OnApplyHook() { }
     }
 
+    /// <summary>
+    /// 基于 自实现虚函数表Hook 的 Hook
+    /// </summary>
+    /// <typeparam name="TDelegate">函数签名</typeparam>
     public partial interface IVTableHook<TDelegate> : IGameAppEvent where TDelegate : Delegate
     {
-        public new VTableHookData CachedData
+        public new VTableHookData<TDelegate> CachedData
         {
-            get => GetCachedData<VTableHookData>();
+            get => GetCachedData<VTableHookData<TDelegate>>();
             set => SetCachedData(value);
         }
 
@@ -142,7 +160,10 @@ namespace CustomizeLib.BepInEx
 
         public void OnApplyHook() { }
     }
-
+    
+    /// <summary>
+    /// 在所有一般插件加载前运行的 HarmonyPatch
+    /// </summary>
     public partial interface IInitHarmony : IInitTask
     {
         public MethodBase GetOriginal();
@@ -166,21 +187,36 @@ namespace CustomizeLib.BepInEx
     /// 二创植物
     /// </summary>
     /// <typeparam name="TBase">植物基类</typeparam>
-    public partial interface IModPlant<TBase> : IGenericModData where TBase : Plant { }
+    public partial interface IModPlant<TBase> : IGenericModData where TBase : Plant 
+    {
+        public CustomPlant CustomPlant { get; }
+    }
+
+    public interface IPlantEventBase { }
 
     /// <summary>
     /// 植物事件
     /// </summary>
-    public partial interface IPlantEvent
+    public partial interface IPlantEvent<TBase> : IPlantEventBase where TBase : Plant
     {
-        public int GetOrder() => Default;
+        public int GetOrder() => CuLibPriority.Default;
 
-        public void OnUpdate(Trigger trigger) { }
-        public void OnFixedUpdate(Trigger trigger) { }
-        public void DieEvent(Trigger trigger, Plant.DieReason reason = Plant.DieReason.Default) { }
-        public void DieEventMustExecute(Trigger trigger, Plant.DieReason reason = Plant.DieReason.Default) { }
-        public void BeforeSerialized(Trigger trigger, SavePlantData data) { }
-        public void AfterDeserialized(Trigger trigger, SavePlantData data) { }
+        public void OnUpdate() { }
+        public void OnFixedUpdate() { }
+        public void DieEvent(Plant.DieReason reason = Plant.DieReason.Default) { }
+        public void DieEventMustExecute(Plant.DieReason reason = Plant.DieReason.Default) { }
+        public void BeforeSerialized(SavePlantData data) { }
+        public void AfterDeserialized(SavePlantData data) { }
+    }
+    #endregion
+
+    #region 实现接口
+    /// <summary>
+    /// ModTask 的 callback 基类
+    /// </summary>
+    public partial interface ITaskCallback
+    {
+        public void Execute(object?[] args);
     }
     #endregion
 }

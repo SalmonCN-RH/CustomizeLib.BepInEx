@@ -5,7 +5,10 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="../Customizelib/BepInEx/CustomizeLib.BepInEx/CustomizeLib.BepInEx.csproj" />
+  <Project Path="../Customizelib/BepInEx/Salmon.BepInEx/Salmon.BepInEx.0.csproj" />
   <Project Path="Lib/CustomizeLib.BepInEx_Re.csproj" />
   <Project Path="Patcher/BepInPriority.BepInEx/BepInPriority.BepInEx.csproj" />
+  <Project Path="Test/ConsoleTest/ConsoleTest.csproj" Id="5bb1d90a-798b-484d-a431-d6ab7f24683b" />
   <Project Path="Test/LibTest.BepInEx/LibTest.BepInEx.csproj" Id="d7224774-8f2e-485e-9d5f-3d17c809e6f8" />
+  <Project Path="Test/Salmon.BepInEx/Salmon.BepInEx.csproj" Id="6d8c54be-a989-46d6-a0c5-5e3eb4892669" />
 </Solution>

@@ -15,42 +15,42 @@ namespace CustomizeLib.BepInEx.Internal.Patches.Harmony
         [HarmonyPrefix]
         internal static void PreAwake()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PreAwake);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PreAwake);
         }
 
         [HarmonyPatch(nameof(GameAPP.Awake))]
         [HarmonyPostfix]
         internal static void PostAwake()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PostAwake);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PostAwake);
         }
 
         [HarmonyPatch(nameof(GameAPP.Start))]
         [HarmonyPrefix]
         internal static void PreStart()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PreStart);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PreStart);
         }
 
         [HarmonyPatch(nameof(GameAPP.Start))]
         [HarmonyPostfix]
         internal static void PostStart()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PostStart);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PostStart);
         }
 
         [HarmonyPatch(nameof(GameAPP.LoadResources))]
         [HarmonyPrefix]
         internal static void PreLoadResources()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PreLoadResources);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PreLoadResources);
         }
 
         [HarmonyPatch(nameof(GameAPP.LoadResources))]
         [HarmonyPostfix]
         internal static void PostLoadResources()
         {
-            IGameAppEvent.ManualRunAll(IGameAppEvent.GameAppEvent.PostLoadResources);
+            IGameAppEvent.ManualRunAll(GameAppEvent.PostLoadResources);
         }
     }
 }

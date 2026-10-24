@@ -1,5 +1,7 @@
 ﻿using BepInEx.Logging;
 using CustomizeLib.BepInEx.Internal.Datas;
+using HarmonyLib;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,8 @@ namespace CustomizeLib.BepInEx.Internal
 {
     internal static class Logger
     {
-        internal static void Log(LogLevel level) => LibData.Instance.Logger?.Log(level, "");
-        internal static void Log(LogLevel level, object message) => LibData.Instance.Logger?.Log(level, message);
+        internal static void Log(BepLogLevel level) => LibData.Instance.Logger?.Log(level, "");
+        internal static void Log(BepLogLevel level, object message) => LibData.Instance.Logger?.Log(level, message);
 
         internal static void LogInfo() => LibData.Instance.Logger?.LogInfo("");
         internal static void LogInfo(object messaege) => LibData.Instance.Logger?.LogInfo(messaege);

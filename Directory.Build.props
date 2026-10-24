@@ -14,6 +14,9 @@
     <Reference Include="$(RepoPath)\GameLib\*.dll">
       <Private>false</Private>
     </Reference>
+	<Reference Include="$(RepoPath)\OtherLib\*.dll">
+	  <Private>false</Private>
+	 </Reference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
   <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(ResPath)&quot;" />

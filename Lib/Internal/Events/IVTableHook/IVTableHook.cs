@@ -1,5 +1,4 @@
-﻿using CustomizeLib.BepInEx.Internal.Tools;
-using Il2CppInterop.Runtime;
+﻿using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Runtime;
 using Il2CppInterop.Runtime.Runtime.VersionSpecific.Class;
 using System;
@@ -12,6 +11,34 @@ using System.Threading.Tasks;
 
 namespace CustomizeLib.BepInEx
 {
+    public unsafe interface IVTableHook
+    {
+        /// <summary>
+        /// 动态创建 <see cref="IVTableHook{TDelegate}"/>
+        /// </summary>
+        /// <typeparam name="TDelegate">委托类型</typeparam>
+        /// <param name="targets">目标地址</param>
+        /// <param name="function">Hook 函数</param>
+        /// <returns><see cref="IVTableHook{TDelegate}"/> 对象</returns>
+        public static IVTableHook<TDelegate> Create<TDelegate>(VTableHookTarget[] targets, TDelegate function) where TDelegate : Delegate => 
+            new DynamicVTableHook<TDelegate>(targets, function);
+
+        /// <summary>
+        /// 动态创建并应用 <see cref="IVTableHook{TDelegate}"/>
+        /// </summary>
+        /// <typeparam name="TDelegate">委托类型</typeparam>
+        /// <param name="targets">目标地址</param>
+        /// <param name="function">Hook 函数</param>
+        /// <param name="originals">原函数列表</param>
+        /// <returns><see cref="IVTableHook{TDelegate}"/> 对象</returns>
+        public static IVTableHook<TDelegate> CreateAndApply<TDelegate>(VTableHookTarget[] targets, TDelegate function, out TDelegate[] originals) where TDelegate : Delegate
+        {
+            var result = (DynamicVTableHook<TDelegate>)Create(targets, function);
+            result.Apply(out originals);
+            return result;
+        }
+    }
+
     public unsafe partial interface IVTableHook<TDelegate>
     {
         /// <summary>
@@ -21,7 +48,15 @@ namespace CustomizeLib.BepInEx
 
         GameAppEvent IGameAppEvent.Filter => GameAppEvent.PostAwake;
 
-        void IGameAppEvent.OnEvent()
+        /// <summary>
+        /// 在 OnEvent 时自动触发启用 Hook
+        /// </summary>
+        void IGameAppEvent.OnEvent() => ApplyHook();
+
+        /// <summary>
+        /// 应用 Hook
+        /// </summary>
+        public void ApplyHook()
         {
             var targets = GetHookTargets();
             var originals = new TDelegate[targets.Length];
@@ -59,9 +94,15 @@ namespace CustomizeLib.BepInEx
             OnApplyHook();
         }
 
+        /// <summary>
+        /// 创建包装器函数, 用于设置 CallingIdx
+        /// </summary>
+        /// <param name="idx">设置的 CallingIdx</param>
+        /// <returns>(包装后的托管函数指针, 包装后的托管函数委托)</returns>
+        /// <exception cref="ArgumentException"></exception>
         internal (IntPtr wrapperPtr, TDelegate wrapper) Wrap(uint idx)
         {
-            var invoke = typeof(TDelegate).GetMethod("Invoke", InternalTools.TypeTools_DefaultFlag) ?? throw new ArgumentException($"Can't find the Invoke method in TDelegate");
+            var invoke = typeof(TDelegate).GetMethod("Invoke", Utils.TypeUtils.DefaultFlag) ?? throw new ArgumentException($"Can't find the Invoke method in TDelegate");
             var parameters = invoke.GetParameters();
             var returnType = invoke.ReturnType;
 
@@ -80,14 +121,14 @@ namespace CustomizeLib.BepInEx
             var il = dm.GetILGenerator();
 
             // this.CallingIdx = idx;
-            var setter = typeof(IVTableHook<TDelegate>).GetProperty(nameof(CallingIdx), InternalTools.TypeTools_DefaultFlag)!.GetSetMethod() ??
+            var setter = typeof(IVTableHook<TDelegate>).GetProperty(nameof(CallingIdx), Utils.TypeUtils.DefaultFlag)!.GetSetMethod() ??
                 throw new ArgumentException($"Can't find the setter for CallingIdx");
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldc_I4, unchecked((int)idx));
             il.Emit(OpCodes.Callvirt, setter);
 
             // return this.GetDelegate().Invoke(arg0, arg1, arg2, ...);
-            var getHookFunction = typeof(IVTableHook<TDelegate>).GetMethod(nameof(GetHookFunction), InternalTools.TypeTools_DefaultFlag)!;
+            var getHookFunction = typeof(IVTableHook<TDelegate>).GetMethod(nameof(GetHookFunction), Utils.TypeUtils.DefaultFlag)!;
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Callvirt, getHookFunction);
 
@@ -99,24 +140,39 @@ namespace CustomizeLib.BepInEx
             var d = dm.CreateDelegate<TDelegate>(this);
             return (Marshal.GetFunctionPointerForDelegate(d), d);
         }
+    }
 
-        public struct VTableHookData
+    public struct VTableHookData<TDelegate> where TDelegate : Delegate
+    {
+        public TDelegate[] Originals { get; set; }
+        public uint CallingIdx { get; set; }
+    }
+
+    public unsafe struct VTableHookTarget(IntPtr vTablePointer, ushort slot)
+    {
+        internal IntPtr VTablePointer { get; set; } = vTablePointer;
+        internal ushort Slot { get; set; } = slot;
+
+        public VTableHookTarget(VirtualInvokeData* vtable, ushort slot) : this((IntPtr)vtable, slot) { }
+        public VTableHookTarget(INativeClassStruct classStruct, ushort slot) : this(classStruct.VTable, slot) { }
+        public VTableHookTarget(Il2CppClass* clazz, ushort slot) : this(UnityVersionHandler.Wrap(clazz), slot) { }
+        public VTableHookTarget(Type type, ushort slot) : this((Il2CppClass*)Il2CppClassPointerStore.GetNativeClassPointer(type), slot) { }
+        public VTableHookTarget(string asmNameWithDll, string namespaze, string name, ushort slot) : this((Il2CppClass*)IL2CPP.GetIl2CppClass(asmNameWithDll, namespaze, name), slot) { }
+        public VTableHookTarget(Il2CppSystem.Type type, ushort slot) : this($"{type.Assembly.GetName().Name}.dll", type.Name, type.Name, slot) { }
+    }
+
+    internal class DynamicVTableHook<TDelegate>(VTableHookTarget[] targets, TDelegate function) : IVTableHook<TDelegate> where TDelegate : Delegate
+    {
+        private TDelegate Function { get; set; } = function;
+        private VTableHookTarget[] HookTargets { get; set; } = targets;
+
+        public TDelegate GetHookFunction() => Function;
+        public VTableHookTarget[] GetHookTargets() => HookTargets;
+
+        public void Apply(out TDelegate[] originals)
         {
-            public TDelegate[] Originals { get; set; }
-            public uint CallingIdx { get; set; }
-        }
-
-        public unsafe struct VTableHookTarget(IntPtr vTablePointer, ushort slot)
-        {
-            internal IntPtr VTablePointer { get; set; } = vTablePointer;
-            internal ushort Slot { get; set; } = slot;
-
-            public VTableHookTarget(VirtualInvokeData* vtable, ushort slot) : this((IntPtr)vtable, slot) { }
-            public VTableHookTarget(INativeClassStruct classStruct, ushort slot) : this(classStruct.VTable, slot) { }
-            public VTableHookTarget(Il2CppClass* clazz, ushort slot) : this(UnityVersionHandler.Wrap(clazz), slot) { }
-            public VTableHookTarget(Type type, ushort slot) : this((Il2CppClass*)Il2CppClassPointerStore.GetNativeClassPointer(type), slot) { }
-            public VTableHookTarget(string asmNameWithDll, string namespaze, string name, ushort slot) : this((Il2CppClass*)IL2CPP.GetIl2CppClass(asmNameWithDll, namespaze, name), slot) { }
-            public VTableHookTarget(Il2CppSystem.Type type, ushort slot) : this($"{type.Assembly.GetName().Name}.dll", type.Name, type.Name, slot) { }
+            ((IVTableHook<TDelegate>)this).ApplyHook(); // 先应用
+            originals = this.GetOriginals(); // 然后才能拿到 originals
         }
     }
 }

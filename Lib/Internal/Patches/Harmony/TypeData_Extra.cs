@@ -1,6 +1,4 @@
-﻿using CustomizeLib.BepInEx.Internal.Datas;
-using CustomizeLib.BepInEx.Internal.Tools;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;

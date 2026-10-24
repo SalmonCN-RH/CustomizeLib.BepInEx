@@ -1,0 +1,17 @@
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\bin\Debug\net6.0\ConsoleTest.exe
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\bin\Debug\net6.0\ConsoleTest.deps.json
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\bin\Debug\net6.0\ConsoleTest.runtimeconfig.json
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\bin\Debug\net6.0\ConsoleTest.dll
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\bin\Debug\net6.0\ConsoleTest.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.csproj.AssemblyReference.cache
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.GeneratedMSBuildEditorConfig.editorconfig
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.AssemblyInfoInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.AssemblyInfo.cs
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.csproj.CoreCompileInputs.cache
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.sourcelink.json
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.dll
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\refint\ConsoleTest.dll
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.pdb
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleTest.genruntimeconfig.cache
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ref\ConsoleTest.dll
+F:\vsrepos\CustomizeLib.BepInEx\Test\ConsoleTest\obj\Debug\net6.0\ConsoleT.0EB5926D.Up2Date

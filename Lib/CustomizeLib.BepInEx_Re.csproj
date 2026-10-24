@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Patcher\BepInPriority.BepInEx\BepInPriority.BepInEx.csproj" />
   </ItemGroup>
+	<PropertyGroup>
+		<ImplicitUsings>disable</ImplicitUsings>
+	</PropertyGroup>
 </Project>

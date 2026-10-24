@@ -1,5 +1,4 @@
-﻿using CustomizeLib.BepInEx.Internal.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -37,7 +36,7 @@ namespace CustomizeLib.BepInEx.Internal.Auxiliary
         /// <exception cref="ArgumentException"></exception>
         internal static bool IsAPIAvailable(string apiName)
         {
-            var prop = typeof(SystemAPI).GetProperty($"d_{apiName}", InternalTools.TypeTools_DefaultFlag) ?? throw new ArgumentException($"Not found api name {apiName} in SystemAPI");
+            var prop = typeof(SystemAPI).GetProperty($"d_{apiName}", Utils.TypeUtils.DefaultFlag) ?? throw new ArgumentException($"Not found api name {apiName} in SystemAPI");
             if (prop.GetValue(null) == null) return false;
             return true;
         }

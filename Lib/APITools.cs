@@ -1,4 +1,5 @@
-﻿using CustomizeLib.BepInEx.Internal.Extensions;
+﻿using AlmanacData;
+using Il2CppInterop.Runtime.Injection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -10,21 +11,38 @@ using UnityEngine;
 namespace CustomizeLib.BepInEx
 {
     #region API 用的结构体
+
+    #region CustomPlant
+    /// <summary>
+    /// 自定义植物数据
+    /// </summary>
+    /// <param name="id">植物 ID</param>
+    /// <param name="prefab">植物 Prefab</param>
+    /// <param name="preview">植物 Preview</param>
+    /// <param name="fusions">融合配方</param>
+    /// <param name="attackInterval">攻击间隔</param>
+    /// <param name="produceInterval">生产间隔</param>
+    /// <param name="attackDamage">攻击伤害</param>
+    /// <param name="maxHealth">最大血量</param>
+    /// <param name="cd">冷却</param>
+    /// <param name="sun">阳光</param>
+    /// <param name="bulletSkins">子弹皮肤</param>
     public struct CustomPlant(
         [NotNull] ID id, [NotNull] GameObject prefab, [NotNull] GameObject preview, [NotNull] List<(ID a, ID b)> fusions,
-        float attackInterval, float produceInterval, int attackDamage, int maxHealth, float cd, int sun, List<(BulletType bullet, GameObject prefab)> bulletSkins)
+        [NotNull] float attackInterval, [NotNull] float produceInterval, [NotNull] int attackDamage, [NotNull] int maxHealth, [NotNull] float cd,
+        [NotNull] int sun, [NotNull] List<(BulletType bullet, GameObject prefab)> bulletSkins)
     {
         [NotNull] public ID Id { get; set; } = id;
         [NotNull] public GameObject Prefab { get; set; } = prefab;
         [NotNull] public GameObject Preview { get; set; } = preview;
         [NotNull] public List<(ID a, ID b)> Fusions { get; set; } = fusions;
         [NotNull] public List<(BulletType bullet, GameObject prefab)> BulletSkins { get; set; } = bulletSkins;
-        public float AttackInterval { get; set; } = attackInterval;
-        public float ProduceInterval { get; set; } = produceInterval;
-        public int AttackDamage { get; set; } = attackDamage;
-        public int MaxHealth { get; set; } = maxHealth;
-        public float CD { get; set; } = cd;
-        public int Sun { get; set; } = sun;
+        [NotNull] public float AttackInterval { get; set; } = attackInterval;
+        [NotNull] public float ProduceInterval { get; set; } = produceInterval;
+        [NotNull] public int AttackDamage { get; set; } = attackDamage;
+        [NotNull] public int MaxHealth { get; set; } = maxHealth;
+        [NotNull] public float CD { get; set; } = cd;
+        [NotNull] public int Sun { get; set; } = sun;
 
         internal readonly PlantDataManager.PlantData ToPlantData()
         {
@@ -40,6 +58,48 @@ namespace CustomizeLib.BepInEx
             };
         }
     }
+    #endregion
+
+    #region CustomPlantAlmanac
+    /// <summary>
+    /// 自定义植物图鉴数据
+    /// </summary>
+    /// <param name="id">植物 ID</param>
+    /// <param name="cost">植物价格</param>
+    /// <param name="info">植物信息</param>
+    /// <param name="introduce">植物介绍</param>
+    /// <param name="name">植物名</param>
+    public struct CustomPlantAlmanac([NotNull] ID id, [NotNull] string cost, [NotNull] string info, [NotNull] string introduce, [NotNull] string name)
+    {
+        [NotNull] public ID Id { get; set; } = id;
+        [NotNull] public string Cost { get; set; } = cost;
+        [NotNull] public string Info { get; set; } = info;
+        [NotNull] public string Introduce { get; set; } = introduce;
+        [NotNull] public string Name { get; set; } = name;
+
+        internal readonly PlantInfo ToPlantInfo()
+        {
+            return new()
+            {
+                seedType = Id,
+                cost = Cost,
+                info = Info,
+                introduce = Introduce,
+                name = Name
+            };
+        }
+
+        public static implicit operator CustomPlantAlmanac(PlantInfo plantInfo)
+        {
+            return new(
+                id: plantInfo.seedType,
+                cost: plantInfo.cost,
+                info: plantInfo.info,
+                introduce: plantInfo.introduce,
+                name: plantInfo.name);
+        }
+    }
+    #endregion
 
     public readonly struct ID(int id)
     {
@@ -152,6 +212,13 @@ namespace CustomizeLib.BepInEx
         UltiZombie_level_a,
         UltiZombie_level_b,
         UltiZombie_level_c
+    }
+
+    public static class CuLibPriority
+    {
+        public const int Low = 0;
+        public const int Default = 500;
+        public const int High = 1000;
     }
     #endregion
 }

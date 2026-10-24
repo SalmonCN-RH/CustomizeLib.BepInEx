@@ -2,7 +2,6 @@
 using BepInEx.Unity.IL2CPP;
 using CustomizeLib.BepInEx.Internal.CoreTasks;
 using CustomizeLib.BepInEx.Internal.Datas;
-using CustomizeLib.BepInEx.Internal.Tools;
 using HarmonyLib;
 using Mono.Cecil;
 using System;
@@ -32,9 +31,9 @@ namespace CustomizeLib.BepInEx.Internal.Mod
 
             LibData.Instance.Logger = Log;
 
-            var methods = InternalTools.TypeTools_GetAllMethods(
-                types: InternalTools.TypeTools_GetAllDerivedTypes<IInitTask>(InternalTools.TypeTools_GetAllAssemblies()),
-                filter: (t) => InternalTools.TypeTools_TryGetMethodWithFlag(t, "RunAll", InternalTools.TypeTools_DefaultDeclaredOnly));
+            var methods = Utils.TypeUtils.GetAllMethods(
+                types: Utils.TypeUtils.GetAllDerivedTypes<IInitTask>(Utils.TypeUtils.GetAllAssemblies()),
+                filter: (t) => Utils.TypeUtils.TryGetMethodWithFlag(t, "RunAll", Utils.TypeUtils.DefaultDeclaredOnly));
             foreach (var method in methods)
             {
                 try
@@ -51,6 +50,8 @@ namespace CustomizeLib.BepInEx.Internal.Mod
                         $"{ex}");
                 }
             }
+
+            IModTask.RunAllCallback<IInitTask>([]);
         }
 
         private static void TryLoadDll(string path)
@@ -59,7 +60,7 @@ namespace CustomizeLib.BepInEx.Internal.Mod
             {
                 var asmName = AssemblyName.GetAssemblyName(path);
 
-                foreach (var asm in InternalTools.TypeTools_GetAllAssemblies())
+                foreach (var asm in Utils.TypeUtils.GetAllAssemblies())
                     if (AssemblyName.ReferenceMatchesDefinition(asm.GetName(), asmName))
                         return;
 
@@ -71,7 +72,7 @@ namespace CustomizeLib.BepInEx.Internal.Mod
                 });
 
                 Logger.LogInfo($"{assembly.FullName}");
-                if (assembly.CustomAttributes.Any(attr => attr.AttributeType.FullName == typeof(CustomizeLibLoadAttribute).FullName))
+                if (assembly.CustomAttributes.Any(attr => attr.AttributeType.FullName == typeof(CuLibLoad).FullName))
                     Assembly.LoadFrom(path);
             }
             catch (BadImageFormatException) { }
