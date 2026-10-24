@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomizeLib.BepInEx_Re")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56a9872654ea8459716082737615b8bca4c12517")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+427ee7ca0be930d673be2e25e30d59c977681e72")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomizeLib.BepInEx_Re")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomizeLib.BepInEx_Re")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

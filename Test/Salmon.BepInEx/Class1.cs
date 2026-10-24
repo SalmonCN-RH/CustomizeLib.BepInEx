@@ -13,12 +13,14 @@ namespace Salmon.BepInEx
             AttackDamage = 0,
             AttackInterval = 0f,
             CD = 0f,
-            Fusions = [],
+            Fusions = [(PlantType.Peashooter, PlantType.GatlingPea)],
             Id = 1905,
             MaxHealth = 2147483647,
             Prefab = Utils.AssetBundleUtils.GetAssetBundle("salmon").GetAsset<GameObject>("SalmonPrefab"),
             Preview = Utils.AssetBundleUtils.GetAssetBundle("salmon").GetAsset<GameObject>("SalmonPreview")
         };
+
+        public CustomPlantAlmanac? CustomPlantAlmanac => new(1905, "", "", "", "鲑鱼");
 
         public void OnLoad()
         {

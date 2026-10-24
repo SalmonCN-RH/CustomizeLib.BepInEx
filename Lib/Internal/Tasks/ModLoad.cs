@@ -1,4 +1,5 @@
-﻿using CustomizeLib.BepInEx.Internal.Datas;
+﻿using AlmanacData;
+using CustomizeLib.BepInEx.Internal.Datas;
 using CustomizeLib.BepInEx.Internal.Mod;
 using Il2CppInterop.Runtime.Injection;
 using System;
@@ -51,6 +52,7 @@ namespace CustomizeLib.BepInEx.Internal.Tasks
                 {
                     try
                     {
+                        // 植物注册
                         var data = IModData.GetData<CustomPlant>(type, nameof(IModPlant<>.CustomPlant));
 
                         if (!ClassInjector.IsTypeRegisteredInIl2Cpp(type))
@@ -77,10 +79,19 @@ namespace CustomizeLib.BepInEx.Internal.Tasks
 
                         foreach (var (a, b) in data.Fusions)
                             MixData.AddOrderedRecipe(a, b, data.Id);
+
+                        // 图鉴注册
+                        var almanac = IModData.GetData<CustomPlantAlmanac?>(type, nameof(IModPlant<>.CustomPlantAlmanac));
+                        if (almanac != null)
+                        {
+                            Utils.NativeClassUtils.Initialize(typeof(AlmanacDataLoader));
+                            AlmanacDataLoader.plantDatas[data.Id] = almanac.Value.ToPlantInfo();
+                            PlantDataManager.unlocked[data.Id] = PlantDataManager.CheckIfPlantUnlock(data.Id);
+                        }
                     }
                     catch (Exception e)
                     {
-                        Logger.LogError(e);
+                        Utils.ExceptionUtils.FormatAndLogException(e);
                     }
                 }
 

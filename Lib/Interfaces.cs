@@ -190,6 +190,7 @@ namespace CustomizeLib.BepInEx
     public partial interface IModPlant<TBase> : IGenericModData where TBase : Plant 
     {
         public CustomPlant CustomPlant { get; }
+        public CustomPlantAlmanac? CustomPlantAlmanac { get; }
     }
 
     public interface IPlantEventBase { }

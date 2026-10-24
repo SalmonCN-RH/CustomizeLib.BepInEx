@@ -30,10 +30,7 @@ namespace CustomizeLib.BepInEx.Internal.Mod
                 {
                     Logger.LogError(
                         $"Error in execute ILoadTask or IGenericTask: \n" +
-                        $"Message: {ex.Message}\n" +
-                        $"{ex.StackTrace}\n" +
-                        $"ToString: \n" +
-                        $"{ex}");
+                        Utils.ExceptionUtils.FormatException(ex));
                 }
             }
 
